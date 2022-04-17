@@ -18,6 +18,12 @@ export default function Recommend() {
     e.preventDefault();
     const payload = {imgUrl: imgUrl, title: title, director: director, shortDesc: description, rating: rating, recommendedBy: recommendedBy};
     dispatch(addMovie(payload));
+    setImgUrl("");
+    setTitle("");
+    setDirector("");
+    setDescription("");
+    setRating("");
+    setRecommendedBy("");
   }
 
   return (
@@ -97,25 +103,6 @@ export default function Recommend() {
           >
           </textarea>
         </div>
-        <label 
-            htmlFor="rating-10" 
-            className="text-left mb-1 block text-sm font-light text-black"
-          >
-            Rating
-          </label>
-        <div className="rating rating-lg rating-half mb-4">
-          <input type="radio" value={0} name="rating-10" className="rating-hidden" />
-          <input type="radio" value={0.5} name="rating-10" className="mask mask-star-2 mask-half-1" onSelect={e => setRating(e.target.value)}/>
-          <input type="radio" value={1} name="rating-10" className="mask mask-star-2 mask-half-2" onSelect={e => setRating(e.target.value)} checked />
-          <input type="radio" value={1.5} name="rating-10" className="mask mask-star-2 mask-half-1" onSelect={e => setRating(e.target.value)} />
-          <input type="radio" value={2} name="rating-10" className="mask mask-star-2 mask-half-2" onSelect={e => setRating(e.target.value)} />
-          <input type="radio" value={2.5} name="rating-10" className="mask mask-star-2 mask-half-1" onSelect={e => setRating(e.target.value)} />
-          <input type="radio" value={3} name="rating-10" className="mask mask-star-2 mask-half-2" onSelect={e => setRating(e.target.value)} />
-          <input type="radio" value={3.5} name="rating-10" className="mask mask-star-2 mask-half-1" onSelect={e => setRating(e.target.value)} />
-          <input type="radio" value={4} name="rating-10" className="mask mask-star-2 mask-half-2" onSelect={e => setRating(e.target.value)} />
-          <input type="radio" value={4.5} name="rating-10" className="mask mask-star-2 mask-half-1" onSelect={e => setRating(e.target.value)} />
-          <input type="radio" value={5} name="rating-10" className="mask mask-star-2 mask-half-2" onSelect={e => setRating(e.target.value)} />
-        </div>
         <div className="mb-4">
           <label 
             htmlFor="recommended-by" 
@@ -133,6 +120,25 @@ export default function Recommend() {
             onChange={e => setRecommendedBy(e.target.value)} 
             required
           />
+        </div>
+        <label 
+            htmlFor="rating-10" 
+            className="text-left mb-1 block text-sm font-light text-black"
+          >
+            Rating
+          </label>
+        <div className="rating rating-lg rating-half mb-4">
+          <input type="radio" value={0} name="rating-10" className="rating-hidden" />
+          <input type="radio" value={0.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => setRating(e.target.value)}/>
+          <input type="radio" value={1} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => setRating(e.target.value)} checked />
+          <input type="radio" value={1.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => setRating(e.target.value)} />
+          <input type="radio" value={2} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => setRating(e.target.value)} />
+          <input type="radio" value={2.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => setRating(e.target.value)} />
+          <input type="radio" value={3} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => setRating(e.target.value)} />
+          <input type="radio" value={3.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => setRating(e.target.value)} />
+          <input type="radio" value={4} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => setRating(e.target.value)} />
+          <input type="radio" value={4.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => setRating(e.target.value)} />
+          <input type="radio" value={5} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => setRating(e.target.value)} />
         </div>
         <button type="submit" className="btn btn-active text-white rounded-lg">Submit <FontAwesomeIcon className="ml-1" icon={faPaperPlane} /></button>
       </form>

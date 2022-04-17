@@ -3,7 +3,6 @@ import MovieCard from "../components/MovieCard/MovieCard";
 
 export default function Recommend() {
     const movies = useSelector(state => state.movies.items);
-    console.log(movies);
     return (
         <>
         <main className="my-12 flex justify-center bg-slate-100">

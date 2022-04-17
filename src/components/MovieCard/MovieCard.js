@@ -7,7 +7,6 @@ function MovieCard({ imgUrl, title, director, description, rating }) {
     for(let i = 0; i < Math.floor(rating); i++) {
         ratingArr.push(i);
     }
-    console.log(ratingArr.length - 1);
     return (
         <div className="card mb-6 mr-2 lg:w-1/4 bg-slate-200 shadow-xl">
             <figure 
@@ -30,10 +29,10 @@ function MovieCard({ imgUrl, title, director, description, rating }) {
                 <div className="card-actions">
                     <div className="flex w-full justify-between items-center">
                         <div className="flex items-center">
-                            {ratingArr.map(rating =>
-                                <FontAwesomeIcon className="mr-1" icon={faStar} />
+                            {ratingArr.map((rating, index) =>
+                                <FontAwesomeIcon key={index} className="mr-1" icon={faStar} />
                             )}
-                            {(ratingArr.length - 1) < rating && <FontAwesomeIcon className="mr-1" icon={faStarHalf} />}
+                            {ratingArr.length < rating && <FontAwesomeIcon className="mr-1" icon={faStarHalf} />}
                         </div>
                         <button className="btn btn-active text-white rounded-lg">Details</button>
                     </div>
