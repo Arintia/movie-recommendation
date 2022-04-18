@@ -63,9 +63,26 @@ export const MoviesSlice = createSlice({
         },
         handleLogin: (state, action) => {
             state.isLoggedIn = !state.isLoggedIn;
+        },
+        confirmMovie: (state, action) => {
+            const {id, imgUrl, title, director, description, rating, recommendedBy} = action.payload;
+            state.adminItems = state.adminItems.filter(movie => movie.id !== id);
+            state.items.push({
+                id: id,
+                imgUrl: imgUrl, 
+                title: title, 
+                director: director, 
+                shortDesc: description, 
+                rating: rating, 
+                recommendedBy: recommendedBy,
+            });
+        },
+        removeMovie: (state, action) => {
+            const id = action.payload;
+            state.adminItems = state.adminItems.filter(movie => movie.id !== id);
         }
     }
 });
 
-export const { addMovie, handleLogin } = MoviesSlice.actions;
+export const { addMovie, handleLogin, confirmMovie, removeMovie } = MoviesSlice.actions;
 export default MoviesSlice.reducer;

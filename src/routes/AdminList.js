@@ -28,6 +28,7 @@ export default function AdminList() {
             {adminItems.map(movie => 
               <AdminCard 
                 key={movie.id}
+                id={movie.id}
                 imgUrl={movie.imgUrl}
                 title={movie.title}
                 director={movie.director}
