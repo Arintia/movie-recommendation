@@ -12,6 +12,7 @@ import Admin from './routes/Admin';
 import Movies from './routes/Movies';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
+import AdminList from './routes/AdminList';
 
 const root = ReactDOMClient.createRoot(document.getElementById("root"));
 root.render(
@@ -22,6 +23,7 @@ root.render(
           <Route path="movies" element={<Movies />} />
           <Route path="recommend" element={<Recommend />} />
           <Route path="admin" element={<Admin />} />
+          <Route path="adminlist" element={<AdminList />} />
         </Route>
       </Routes>
     </BrowserRouter>

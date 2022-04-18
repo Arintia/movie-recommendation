@@ -24,17 +24,27 @@ export const MoviesSlice = createSlice({
                 rating: 4.8,
                 recommendedBy: "Yigit Atak",
                 createdAt: null
-                
             }              
         ],
-        addedItem: false
+        adminAccounts: [
+            {
+                id: uid(),
+                userName: "test",
+                password: "12345"
+            }
+        ],
+        adminItems: [
+
+        ],
+        addedItem: false,
+        isLoggedIn: false
     },
     reducers: {
         addMovie: (state,action) => {
             const {imgUrl, title, director, shortDesc, rating, recommendedBy } = action.payload;
             const found = state.items.find(movie => movie.title.toUpperCase() === title.toUpperCase());
-            if(found !== null) {
-                state.items.push(
+            if(!found) {
+                state.adminItems.push(
                     { 
                         id: uid(),
                         imgUrl: imgUrl, 
@@ -50,9 +60,12 @@ export const MoviesSlice = createSlice({
             } else {
                 state.addedItem = false;
             }
+        },
+        handleLogin: (state, action) => {
+            state.isLoggedIn = !state.isLoggedIn;
         }
     }
 });
 
-export const { addMovie } = MoviesSlice.actions;
+export const { addMovie, handleLogin } = MoviesSlice.actions;
 export default MoviesSlice.reducer;

@@ -1,11 +1,12 @@
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addMovie } from "../redux/movies/MoviesSlice";
 
 
 export default function Recommend() {
+  const movieAdded = useSelector(state => state.movies.addedItem); 
   const dispatch = useDispatch();
   const imgUrl = useRef("");
   const title = useRef("");
@@ -14,12 +15,14 @@ export default function Recommend() {
   const rating = useRef(0);
   const recommendedBy = useRef("");
   const confirmationAlert = useRef();
+  const failAlert = useRef();
 
   useEffect(() => {
     confirmationAlert.current = document.getElementById("conf-alert");
+    failAlert.current = document.getElementById("deny-alert");
   }, [])
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {
       imgUrl: imgUrl.current, 
@@ -29,7 +32,7 @@ export default function Recommend() {
       rating: rating.current, 
       recommendedBy: recommendedBy.current
     };
-    dispatch(addMovie(payload));
+    await dispatch(addMovie(payload));
     confirmationAlert.current.classList.remove("hidden");
     setTimeout(() => confirmationAlert.current.classList.add("hidden"), 2500);
   }
@@ -145,7 +148,7 @@ export default function Recommend() {
         </div>
         <button type="submit" className="btn btn-active text-white rounded-lg">Submit <FontAwesomeIcon className="ml-1" icon={faPaperPlane} /></button>
       </form>
-      <div className="absolute bottom-0 w-1/4 right-4 alert alert-success shadow-lg hidden transition-all" id="conf-alert">
+      <div className="absolute top-14 w-2/3 xl:bottom-0 xl:w-1/4 xl:h-12 xl:right-4 alert alert-success shadow-lg hidden transition-all" id="conf-alert">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
           <span>Your recommendation has been sent for confirmation!</span>
