@@ -88,7 +88,7 @@ export default function Recommend() {
             required
           />
         </div>
-        <p id="error-text" class="text-left text-sm text-red-600 mb-6 hidden">You entered an incorrect username or password.</p>
+        <p id="error-text" className="text-left text-sm text-red-600 mb-6 hidden">You entered an incorrect username or password.</p>
         <button type="submit" className="btn btn-active text-white rounded-lg">Login <FontAwesomeIcon className="ml-1" icon={faPaperPlane} /></button>
       </form>
     </main>

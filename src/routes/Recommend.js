@@ -1,12 +1,12 @@
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addMovie } from "../redux/movies/MoviesSlice";
 
 
 export default function Recommend() {
-  const movieAdded = useSelector(state => state.movies.addedItem); 
+  // const movieAdded = useSelector(state => state.movies.addedItem); 
   const dispatch = useDispatch();
   const imgUrl = useRef("");
   const title = useRef("");
@@ -150,7 +150,7 @@ export default function Recommend() {
       </form>
       <div className="absolute top-14 w-2/3 xl:bottom-0 xl:w-1/4 xl:h-12 xl:right-4 alert alert-success shadow-lg hidden transition-all" id="conf-alert">
         <div>
-          <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
           <span>Your recommendation has been sent for confirmation!</span>
         </div>
       </div>

@@ -12,8 +12,7 @@ export const MoviesSlice = createSlice({
                 director: "Justin Lin",
                 shortDesc: "F9 (also known as F9: The Fast Saga and internationally as Fast & Furious 9) is a 2021 action film directed by Justin Lin from a screenplay by Daniel Casey and Lin.[9] It is the sequel to The Fate of the Furious (2017), which serves as the ninth main installment, and the tenth full-length film in the Fast & Furious franchise.",
                 rating: 3.7,
-                recommendedBy: "Yigit Atak",
-                createdAt: null
+                recommendedBy: "Yigit Atak"
             },
             {
                 id: uid(),
@@ -22,8 +21,7 @@ export const MoviesSlice = createSlice({
                 director: "Carlo Bernard",
                 shortDesc: "Narcos: Mexico is an American crime drama streaming television series created and produced by Chris Brancato, Carlo Bernard, and Doug Miro that premiered on Netflix on November 16, 2018.",
                 rating: 4.8,
-                recommendedBy: "Yigit Atak",
-                createdAt: null
+                recommendedBy: "Yigit Atak"
             }              
         ],
         adminAccounts: [
@@ -42,21 +40,23 @@ export const MoviesSlice = createSlice({
     reducers: {
         addMovie: (state,action) => {
             const {imgUrl, title, director, shortDesc, rating, recommendedBy } = action.payload;
-            const found = state.items.find(movie => movie.title.toUpperCase() === title.toUpperCase());
-            if(!found) {
-                state.adminItems.push(
-                    { 
-                        id: uid(),
-                        imgUrl: imgUrl, 
-                        title: title, 
-                        director: director, 
-                        shortDesc: shortDesc, 
-                        rating: rating, 
-                        recommendedBy: recommendedBy, 
-                        createdAt: Date.now() 
-                    }
-                );
-                state.addedItem = true;
+            if(!state.items.find(movie => movie.title.toUpperCase() === title.toUpperCase())) {
+                if(!state.adminItems.find(movie => movie.title.toUpperCase() === title.toUpperCase())) {
+                    state.adminItems.push(
+                        { 
+                            id: uid(),
+                            imgUrl: imgUrl, 
+                            title: title, 
+                            director: director, 
+                            shortDesc: shortDesc, 
+                            rating: rating, 
+                            recommendedBy: recommendedBy, 
+                        }
+                    );
+                    state.addedItem = true;
+                } else {
+                    state.addedItem = false;
+                }
             } else {
                 state.addedItem = false;
             }
