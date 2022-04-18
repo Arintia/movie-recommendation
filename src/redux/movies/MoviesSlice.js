@@ -26,23 +26,30 @@ export const MoviesSlice = createSlice({
                 createdAt: null
                 
             }              
-        ]
+        ],
+        addedItem: false
     },
     reducers: {
         addMovie: (state,action) => {
             const {imgUrl, title, director, shortDesc, rating, recommendedBy } = action.payload;
-            state.items.push(
-                { 
-                    id: uid(),
-                    imgUrl: imgUrl, 
-                    title: title, 
-                    director: director, 
-                    shortDesc: shortDesc, 
-                    rating: rating, 
-                    recommendedBy: recommendedBy, 
-                    createdAt: Date.now() 
-                }
-            );
+            const found = state.items.find(movie => movie.title.toUpperCase() === title.toUpperCase());
+            if(found !== null) {
+                state.items.push(
+                    { 
+                        id: uid(),
+                        imgUrl: imgUrl, 
+                        title: title, 
+                        director: director, 
+                        shortDesc: shortDesc, 
+                        rating: rating, 
+                        recommendedBy: recommendedBy, 
+                        createdAt: Date.now() 
+                    }
+                );
+                state.addedItem = true;
+            } else {
+                state.addedItem = false;
+            }
         }
     }
 });

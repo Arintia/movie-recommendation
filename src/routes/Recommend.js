@@ -1,29 +1,37 @@
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { addMovie } from "../redux/movies/MoviesSlice";
 
 
 export default function Recommend() {
   const dispatch = useDispatch();
-  const [imgUrl, setImgUrl] = useState("");
-  const [title, setTitle] = useState("");
-  const [director, setDirector] = useState("");
-  const [description, setDescription] = useState("");
-  const [rating, setRating] = useState("");
-  const [recommendedBy, setRecommendedBy] = useState("");
+  const imgUrl = useRef("");
+  const title = useRef("");
+  const director = useRef("");
+  const description = useRef("");
+  const rating = useRef(0);
+  const recommendedBy = useRef("");
+  const confirmationAlert = useRef();
+
+  useEffect(() => {
+    confirmationAlert.current = document.getElementById("conf-alert");
+  }, [])
 
   const handleSubmit = e => {
     e.preventDefault();
-    const payload = {imgUrl: imgUrl, title: title, director: director, shortDesc: description, rating: rating, recommendedBy: recommendedBy};
+    const payload = {
+      imgUrl: imgUrl.current, 
+      title: title.current, 
+      director: director.current, 
+      shortDesc: description.current, 
+      rating: rating.current, 
+      recommendedBy: recommendedBy.current
+    };
     dispatch(addMovie(payload));
-    setImgUrl("");
-    setTitle("");
-    setDirector("");
-    setDescription("");
-    setRating("");
-    setRecommendedBy("");
+    confirmationAlert.current.classList.remove("hidden");
+    setTimeout(() => confirmationAlert.current.classList.add("hidden"), 2500);
   }
 
   return (
@@ -41,10 +49,9 @@ export default function Recommend() {
             type="text" 
             name="img-url" 
             id="img-url" 
-            value={imgUrl}
             className="bg-slate-900 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
             placeholder="https://yourexample.com/img.png"
-            onChange={e => setImgUrl(e.target.value)} 
+            onChange={e => imgUrl.current = e.target.value} 
             required
           />
         </div>
@@ -59,10 +66,9 @@ export default function Recommend() {
             type="text" 
             name="title" 
             id="title"
-            value={title} 
             className="bg-slate-900 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
             placeholder="Your title" 
-            onChange={e => setTitle(e.target.value)} 
+            onChange={e => title.current = e.target.value} 
             required
           />
         </div>
@@ -77,10 +83,9 @@ export default function Recommend() {
             type="text" 
             name="director" 
             id="director" 
-            value={director}
             className="bg-slate-900 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
             placeholder="Your director" 
-            onChange={e => setDirector(e.target.value)} 
+            onChange={e => director.current = e.target.value} 
             required
           />
         </div>
@@ -96,9 +101,8 @@ export default function Recommend() {
             className="textarea w-full resize-none rounded-lg bg-slate-900 text-white" 
             placeholder="Short description(max. 255 chars allowed)"
             id="description"
-            value={description}
             maxLength={255}
-            onChange={e => setDescription(e.target.value)} 
+            onChange={e => description.current = e.target.value} 
             required
           >
           </textarea>
@@ -114,10 +118,9 @@ export default function Recommend() {
             type="text" 
             name="recommended-by" 
             id="recommended-by" 
-            value={recommendedBy}
             className="bg-slate-900 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
             placeholder="Your name" 
-            onChange={e => setRecommendedBy(e.target.value)} 
+            onChange={e => recommendedBy.current = e.target.value} 
             required
           />
         </div>
@@ -129,19 +132,25 @@ export default function Recommend() {
           </label>
         <div className="rating rating-lg rating-half mb-4">
           <input type="radio" value={0} name="rating-10" className="rating-hidden" />
-          <input type="radio" value={0.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => setRating(e.target.value)}/>
-          <input type="radio" value={1} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => setRating(e.target.value)} checked />
-          <input type="radio" value={1.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => setRating(e.target.value)} />
-          <input type="radio" value={2} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => setRating(e.target.value)} />
-          <input type="radio" value={2.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => setRating(e.target.value)} />
-          <input type="radio" value={3} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => setRating(e.target.value)} />
-          <input type="radio" value={3.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => setRating(e.target.value)} />
-          <input type="radio" value={4} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => setRating(e.target.value)} />
-          <input type="radio" value={4.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => setRating(e.target.value)} />
-          <input type="radio" value={5} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => setRating(e.target.value)} />
+          <input type="radio" value={0.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => rating.current = e.target.value}/>
+          <input type="radio" value={1} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => rating.current = e.target.value} checked />
+          <input type="radio" value={1.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => rating.current = e.target.value} />
+          <input type="radio" value={2} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => rating.current = e.target.value} />
+          <input type="radio" value={2.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => rating.current = e.target.value} />
+          <input type="radio" value={3} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => rating.current = e.target.value} />
+          <input type="radio" value={3.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => rating.current = e.target.value} />
+          <input type="radio" value={4} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => rating.current = e.target.value} />
+          <input type="radio" value={4.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => rating.current = e.target.value} />
+          <input type="radio" value={5} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => rating.current = e.target.value} />
         </div>
         <button type="submit" className="btn btn-active text-white rounded-lg">Submit <FontAwesomeIcon className="ml-1" icon={faPaperPlane} /></button>
       </form>
+      <div className="absolute bottom-0 w-1/4 right-4 alert alert-success shadow-lg hidden transition-all" id="conf-alert">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>Your recommendation has been sent for confirmation!</span>
+        </div>
+      </div>
     </main>
   );
 }
