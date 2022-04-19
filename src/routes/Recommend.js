@@ -16,7 +16,8 @@ export default function Recommend() {
   const recommendedBy = useRef("");
   const confirmationAlert = useRef();
   const failAlert = useRef();
-
+  const formInputs = document.getElementsByClassName("form-input");
+  
   useEffect(() => {
     confirmationAlert.current = document.getElementById("conf-alert");
     failAlert.current = document.getElementById("deny-alert");
@@ -33,6 +34,9 @@ export default function Recommend() {
       recommendedBy: recommendedBy.current
     };
     await dispatch(addMovie(payload));
+    for(const input of formInputs) {
+      input.value = "";
+    }
     confirmationAlert.current.classList.remove("hidden");
     setTimeout(() => confirmationAlert.current.classList.add("hidden"), 2500);
   }
@@ -52,7 +56,7 @@ export default function Recommend() {
             type="text" 
             name="img-url" 
             id="img-url" 
-            className="bg-slate-900 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+            className="form-input bg-slate-900 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
             placeholder="https://yourexample.com/img.png"
             onChange={e => imgUrl.current = e.target.value} 
             required
@@ -69,7 +73,7 @@ export default function Recommend() {
             type="text" 
             name="title" 
             id="title"
-            className="bg-slate-900 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+            className="form-input bg-slate-900 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
             placeholder="Your title" 
             onChange={e => title.current = e.target.value} 
             required
@@ -86,7 +90,7 @@ export default function Recommend() {
             type="text" 
             name="director" 
             id="director" 
-            className="bg-slate-900 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+            className="form-input bg-slate-900 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
             placeholder="Your director" 
             onChange={e => director.current = e.target.value} 
             required
@@ -101,7 +105,7 @@ export default function Recommend() {
           </label>
           <textarea 
             name="description"
-            className="textarea w-full resize-none rounded-lg bg-slate-900 text-white" 
+            className="form-input textarea w-full resize-none rounded-lg bg-slate-900 text-white" 
             placeholder="Short description(max. 255 chars allowed)"
             id="description"
             maxLength={255}
@@ -121,7 +125,7 @@ export default function Recommend() {
             type="text" 
             name="recommended-by" 
             id="recommended-by" 
-            className="bg-slate-900 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+            className="form-input bg-slate-900 border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
             placeholder="Your name" 
             onChange={e => recommendedBy.current = e.target.value} 
             required
