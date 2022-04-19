@@ -1,8 +1,19 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import AdminCard from "../components/AdminCard/AdminCard";
 
 export default function AdminList() {
+  let navigate = useNavigate();
   const adminItems = useSelector(state => state.movies.adminItems);
+  const isLoggedIn = useSelector(state => state.movies.isLoggedIn);
+
+  useEffect(() => {
+    if(!isLoggedIn) {
+      navigate("/admin");
+    }
+  }, [navigate, isLoggedIn]);
+  
   return (
     <main className="flex flex-col justify-center pt-12 w-screen h-screen bg-slate-100 text-center">
       <div className="container">

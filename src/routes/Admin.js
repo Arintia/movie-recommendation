@@ -9,6 +9,7 @@ export default function Recommend() {
   let navigate = useNavigate();
   const dispatch = useDispatch();
   const adminAccounts = useSelector(state => state.movies.adminAccounts);
+  const isLoggedIn = useSelector(state => state.movies.isLoggedIn);
   const username = useRef("");
   const password = useRef("");
   const errorText = useRef();
@@ -16,7 +17,13 @@ export default function Recommend() {
 
   useEffect(() => {
     errorText.current = document.getElementById("error-text");
-  }, [])
+  }, []);
+
+  useEffect(() => {
+    if(isLoggedIn) {
+      navigate("/adminlist");
+    }
+  }, [navigate, isLoggedIn])
 
   const handleSubmit = async (e) => {
     e.preventDefault();

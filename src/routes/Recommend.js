@@ -38,7 +38,7 @@ export default function Recommend() {
   }
 
   return (
-    <main className="pt-12 mt-12 w-screen h-screen flex justify-center items-center bg-slate-100">
+    <main className="pt-12 mt-12 w-screen h-screen flex justify-center items-center bg-slate-100 mb-16">
       <form className="mx-auto text-center mt-12 lg:w-1/4 sm:w-1/2 bg-white rounded-xl p-9" onSubmit={handleSubmit}>
         <h2 className="text-xl text-left mb-2">Recommend a movie</h2>
         <div className="mb-4">

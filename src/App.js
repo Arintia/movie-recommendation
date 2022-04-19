@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet, NavLink } from "react-router-dom";
-
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function App() {
   return (
     <>
@@ -33,6 +34,19 @@ function App() {
         </ul>
       </nav>
       <Outlet />  
+      <footer class="footer fixed bottom-0 items-center p-4 bg-neutral text-neutral-content">
+        <div class="items-center grid-flow-col">
+          <p>Developed by Yigit Atak</p>
+        </div> 
+        <div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+          <a href="www.github.com" className="text-white text-3xl">
+            <FontAwesomeIcon icon={faGithub} />
+          </a> 
+          <a href="www.github.com" className="text-white text-3xl">
+            <FontAwesomeIcon icon={faLinkedin} />
+          </a>
+        </div>
+      </footer>
     </>
   );
 }
