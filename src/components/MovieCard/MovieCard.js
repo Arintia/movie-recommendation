@@ -14,7 +14,7 @@ function MovieCard({ imgUrl, title, director, description, rating }) {
                     {
                         width: "100%", 
                         height: "256px", 
-                        backgroundImage: `url("${imgUrl}")`, 
+                        backgroundImage: `url("${imgUrl}"), url("https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg")`, 
                         backgroundPosition: "center center", 
                         backgroundRepeat: "no-repeat"
                     }
