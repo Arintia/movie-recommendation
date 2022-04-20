@@ -48,17 +48,22 @@ export const MoviesSlice = createSlice({
             state.isLoggedIn = !state.isLoggedIn;
         },
         confirmMovie: (state, action) => {
-            const {id, imgUrl, title, director, description, rating, recommendedBy} = action.payload;
-            state.adminItems = state.adminItems.filter(movie => movie.id !== id);
-            state.items.push({
-                id: id,
-                imgUrl: imgUrl, 
-                title: title, 
-                director: director, 
-                shortDesc: description, 
-                rating: rating, 
-                recommendedBy: recommendedBy,
-            });
+            const id = action.payload;
+            const item = state.adminItems.find(movie => movie.id === id);
+            if(!state.items.find(movie => movie.title.toUpperCase() === item.title.toUpperCase())) {
+                state.adminItems = state.adminItems.filter(movie => movie.id !== id);
+                state.items.push({
+                    id: id,
+                    imgUrl: item.imgUrl, 
+                    title: item.title, 
+                    director: item.director, 
+                    shortDesc: item.description, 
+                    rating: item.rating, 
+                    recommendedBy: item.recommendedBy,
+                });
+            } else {
+                state.adminItems = state.adminItems.filter(movie => movie.id !== id);
+            }
         },
         removeMovie: (state, action) => {
             const id = action.payload;

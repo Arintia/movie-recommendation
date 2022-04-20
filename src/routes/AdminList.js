@@ -1,12 +1,56 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import AdminCard from "../components/AdminCard/AdminCard";
+import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { confirmMovie, removeMovie } from "../redux/movies/MoviesSlice";
 
 export default function AdminList() {
   let navigate = useNavigate();
+  const dispatch = useDispatch();
   const adminItems = useSelector(state => state.movies.adminItems);
   const isLoggedIn = useSelector(state => state.movies.isLoggedIn);
+  const [isAllChecked, setIsAllChecked] = useState(false);
+  const [checked, setChecked] = useState([]);
+  const checkboxes = Array.from(document.getElementsByClassName("input-checkbox"));
+
+  function addList(id) {
+    if(!checked.includes(id)) {
+      setChecked([...checked, id]);
+    } else {
+      setChecked(checked.filter(item => item !== id));
+    }
+  }
+
+  useEffect(() => {
+    if(checked.length === checkboxes.length) {
+      setIsAllChecked(true);
+    } else {
+      setIsAllChecked(false);
+    }
+  }, [checked, checkboxes.length]);
+
+  function checkAll() {
+    if(isAllChecked) {
+      setChecked([]);
+    } else {
+      setChecked(checkboxes.map(checkbox => checkbox.id));
+    }
+    setIsAllChecked(!isAllChecked);
+  }
+
+  function handleRemove() {
+    for(const movieID of checked) {
+      dispatch(removeMovie(movieID));
+    }
+  }
+
+  function handleConfirm() {
+    for(const movieID of checked) {
+      dispatch(confirmMovie(movieID));
+    }
+  }
 
   useEffect(() => {
     if(!isLoggedIn) {
@@ -25,7 +69,7 @@ export default function AdminList() {
             <tr>
               <th>
                 <label>
-                  <input type="checkbox" className="checkbox" />
+                  <input type="checkbox" className="checkbox" onChange={checkAll} checked={isAllChecked} />
                 </label>
               </th>
               <th>Recommended Information</th>
@@ -46,10 +90,38 @@ export default function AdminList() {
                 description={movie.shortDesc}
                 rating={movie.rating}
                 recommendedBy={movie.recommendedBy}
+                addList={addList}
+                checked={checked}
               />
             )}
-            
           </tbody>
+          <tfoot>
+            <tr>
+              <th>
+                <label>
+                  <input type="checkbox" className="checkbox" onChange={checkAll} checked={isAllChecked} />
+                </label>
+              </th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th>
+                <button 
+                  className="btn rounded-lg btn-sm btn-success mr-2"
+                  onClick={handleConfirm}
+                >
+                    <FontAwesomeIcon className="ml-1" icon={faCheck} />
+                </button>
+                <button 
+                    className="btn rounded-lg btn-sm btn-error"
+                    onClick={handleRemove}
+                >
+                    <FontAwesomeIcon className="ml-1" icon={faTrash} />
+                </button>
+              </th>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </main>

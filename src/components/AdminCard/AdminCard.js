@@ -5,13 +5,19 @@ import { confirmMovie, removeMovie } from '../../redux/movies/MoviesSlice';
 import { useDispatch } from 'react-redux';
 
 
-function AdminCard({ id, imgUrl, title, director, description, rating, recommendedBy }) {
+function AdminCard({ id, imgUrl, title, director, description, rating, recommendedBy, addList, checked }) {
     const dispatch = useDispatch();
     return (
         <tr>
             <th>
                 <label>
-                    <input type="checkbox" className="checkbox" />
+                    <input 
+                        id={id} 
+                        type="checkbox" 
+                        className="checkbox input-checkbox" 
+                        onChange={(e) => addList(e.target.id)} 
+                        checked={checked.includes(id)}
+                    />
                 </label>
             </th>
             <td>

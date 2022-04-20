@@ -34,11 +34,11 @@ function App() {
         </ul>
       </nav>
       <Outlet />  
-      <footer class="footer fixed bottom-0 items-center p-4 bg-neutral text-neutral-content">
-        <div class="items-center grid-flow-col">
+      <footer className="footer fixed bottom-0 items-center p-4 bg-neutral text-neutral-content">
+        <div className="items-center grid-flow-col">
           <p>Developed by Yigit Atak</p>
         </div> 
-        <div class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+        <div className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
           <a href="www.github.com" className="text-white text-3xl">
             <FontAwesomeIcon icon={faGithub} />
           </a> 
