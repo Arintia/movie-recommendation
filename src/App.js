@@ -34,7 +34,7 @@ function App() {
         </ul>
       </nav>
       <Outlet />  
-      <footer className="footer fixed bottom-0 items-center p-4 bg-neutral text-neutral-content">
+      <footer className="footer fixed bottom-0 items-center p-4 bg-neutral text-neutral-content z-20">
         <div className="items-center grid-flow-col">
           <p>Developed by Yigit Atak</p>
         </div> 

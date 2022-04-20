@@ -71,8 +71,6 @@ export default function AdminList() {
 
   const handlePageSwitch = (e) => {
     const pageValue = Number(e.target.id);
-    console.log(pageValue);
-    console.log(page);
     if(pageValue !== page) {
       setPage(pageValue);
     }
@@ -123,8 +121,8 @@ export default function AdminList() {
       <div className="container">
         <h2 className="text-3xl font-bold mb-6">Recommendation List</h2>
       </div>
-      <div className="overflow-x-auto w-full max-w-full">
-        <table className="table w-full">
+      <div className="overflow-x-auto w-full max-w-full mb-12">
+        <table className="table w-full z-10">
           <thead>
             <tr>
               <th>
@@ -179,7 +177,7 @@ export default function AdminList() {
                     {totalPages > 0 && 
                       <ul tabIndex="0" className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
                         {[...Array(Math.ceil(totalPages))].map((page, index) => 
-                          <li><button onClick={handlePageSwitch} id={index}>Page {index+1}</button></li>
+                          <li><button className="z-30" onClick={handlePageSwitch} id={index}>Page {index+1}</button></li>
                         )}
                       </ul>
                     }
