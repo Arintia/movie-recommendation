@@ -1,7 +1,7 @@
 import React from 'react';
 import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { confirmMovie, removeMovie } from '../../redux/movies/MoviesSlice';
+import { confirmMovieAsync, removeAdminMovieAsync } from '../../redux/movies/MoviesSlice';
 import { useDispatch } from 'react-redux';
 
 
@@ -51,24 +51,14 @@ function AdminCard({ id, imgUrl, title, director, description, rating, recommend
                 <button 
                     className="btn rounded-lg btn-sm btn-success mr-2"
                     onClick={() => 
-                        dispatch(confirmMovie(
-                            {
-                                id: id, 
-                                imgUrl: imgUrl, 
-                                title: title, 
-                                director: director, 
-                                description: description, 
-                                rating: rating, 
-                                recommendedBy: recommendedBy
-                            }
-                        ))
+                        dispatch(confirmMovieAsync(id))
                     }
                 >
                     <FontAwesomeIcon className="ml-1" icon={faCheck} />
                 </button>
                 <button 
                     className="btn rounded-lg btn-sm btn-error"
-                    onClick={() => dispatch(removeMovie(id))}
+                    onClick={() => dispatch(removeAdminMovieAsync(id))}
                 >
                     <FontAwesomeIcon className="ml-1" icon={faTrash} />
                 </button>

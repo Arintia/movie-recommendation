@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Outlet, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 function App() {
   const navigate = useNavigate();
   const location = useLocation();

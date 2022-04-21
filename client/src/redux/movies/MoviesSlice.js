@@ -1,5 +1,37 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { uid } from "uid";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {uid} from "uid";
+import axios from "axios";
+
+export const getMoviesAsync = createAsyncThunk('movies/getMoviesAsync', async () => {
+    const res = await axios(`http://localhost:3001/movies`);
+    return res.data;
+});
+
+export const getAdminMoviesAsync = createAsyncThunk('movies/getAdminMoviesAsync', async () => {
+    const res = await axios(`http://localhost:3001/adminlist`);
+    return res.data;
+});
+
+export const confirmMovieAsync = createAsyncThunk('movies/confirmMovieAsync', async (id) => {
+    const res = await axios.post(`http://localhost:3001/movies/${id}`);
+    return res.data;
+});
+
+export const deleteMovieAsync = createAsyncThunk('movies/deleteMovieAsync', async (id) => {
+    const res = await axios.delete(`http://localhost:3001/movies/${id}`);
+    return res.data;
+});
+
+export const addAdminMovieAsync = createAsyncThunk('movies/addAdminMovieAsync', async (data) => {
+    const res = await axios.post(`http://localhost:3001/adminlist`, data);
+    return res.data;
+});
+
+export const removeAdminMovieAsync = createAsyncThunk('movies/removeAdminMovieAsync', async (id) => {
+    const res = await axios.delete(`http://localhost:3001/adminlist/${id}`);
+    return res.data;
+});
+
 
 export const MoviesSlice = createSlice({
     name: "movies",
@@ -21,56 +53,35 @@ export const MoviesSlice = createSlice({
         isLoggedIn: false
     },
     reducers: {
-        addMovie: (state,action) => {
-            const {imgUrl, title, director, shortDesc, rating, recommendedBy } = action.payload;
-            if(!state.items.find(movie => movie.title.toUpperCase() === title.toUpperCase())) {
-                if(!state.adminItems.find(movie => movie.title.toUpperCase() === title.toUpperCase())) {
-                    state.adminItems.push(
-                        { 
-                            id: uid(),
-                            imgUrl: imgUrl, 
-                            title: title, 
-                            director: director, 
-                            shortDesc: shortDesc, 
-                            rating: rating, 
-                            recommendedBy: recommendedBy, 
-                        }
-                    );
-                    state.addedItem = true;
-                } else {
-                    state.addedItem = false;
-                }
-            } else {
-                state.addedItem = false;
-            }
-        },
         handleLogin: (state, action) => {
             state.isLoggedIn = !state.isLoggedIn;
+        }
+    },
+    extraReducers: {
+        [confirmMovieAsync.fulfilled]: (state, action) => {
+            const newMovie = action.payload;
+            state.items.push(newMovie);
+            state.adminItems = state.adminItems.filter(movie => newMovie.id !== movie.id);
         },
-        confirmMovie: (state, action) => {
-            const id = action.payload;
-            const item = state.adminItems.find(movie => movie.id === id);
-            if(!state.items.find(movie => movie.title.toUpperCase() === item.title.toUpperCase())) {
-                state.adminItems = state.adminItems.filter(movie => movie.id !== id);
-                state.items.push({
-                    id: id,
-                    imgUrl: item.imgUrl, 
-                    title: item.title, 
-                    director: item.director, 
-                    shortDesc: item.shortDesc, 
-                    rating: item.rating, 
-                    recommendedBy: item.recommendedBy,
-                });
-            } else {
-                state.adminItems = state.adminItems.filter(movie => movie.id !== id);
-            }
+        [deleteMovieAsync.fulfilled]: (state, action) => {
+            const { id } = action.payload;
+            state.items = state.items.filter(movie => id !== movie.id);
         },
-        removeMovie: (state, action) => {
-            const id = action.payload;
-            state.adminItems = state.adminItems.filter(movie => movie.id !== id);
+        [addAdminMovieAsync.fulfilled]: (state, action) => {
+            state.adminItems.push(action.payload);
+        },
+        [removeAdminMovieAsync.fulfilled]: (state, action) => {
+            const { id } = action.payload;
+            state.adminItems = state.adminItems.filter(movie => id !== movie.id);
+        },
+        [getMoviesAsync.fulfilled]: (state, action) => {
+            state.items = action.payload;
+        },
+        [getAdminMoviesAsync.fulfilled]: (state, action) => {
+            state.adminItems = action.payload;
         }
     }
 });
 
-export const { addMovie, handleLogin, confirmMovie, removeMovie } = MoviesSlice.actions;
+export const { handleLogin } = MoviesSlice.actions;
 export default MoviesSlice.reducer;

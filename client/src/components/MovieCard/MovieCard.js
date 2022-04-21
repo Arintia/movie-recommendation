@@ -7,7 +7,6 @@ import { toRatingArr } from '../../utils/functions';
 function MovieCard({ imgUrl, title, director, description, rating }) {
 
     const ratingArr = toRatingArr(rating);
-    console.log(ratingArr);
     return (
         <div className="card w-full bg-slate-200 shadow-xl">
             <figure 

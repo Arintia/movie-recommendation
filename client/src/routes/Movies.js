@@ -1,9 +1,17 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, Outlet } from "react-router-dom";
 import MovieCard from "../components/MovieCard/MovieCard";
+import { getMoviesAsync } from "../redux/movies/MoviesSlice";
 
 export default function Recommend() {
     const movies = useSelector(state => state.movies.items);
+    const dispatch = useDispatch();
+    
+    useEffect(() => {
+        dispatch(getMoviesAsync());
+    }, [dispatch]);
+    
     return (
         <>
         <Outlet />

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import AdminCard from "../components/AdminCard/AdminCard";
 import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { confirmMovie, removeMovie } from "../redux/movies/MoviesSlice";
+import { confirmMovieAsync, getAdminMoviesAsync, removeAdminMovieAsync } from "../redux/movies/MoviesSlice";
 import { ITEMS_PER_PAGE } from "../utils/constants";
 
 export default function AdminList() {
@@ -36,6 +36,10 @@ export default function AdminList() {
     }
   }, [checked, checkboxes.length]);
 
+  useEffect(() => {
+    dispatch(getAdminMoviesAsync());
+  }, [dispatch]);
+
   function checkAll() {
     if(isAllChecked) {
       setChecked([]);
@@ -47,13 +51,13 @@ export default function AdminList() {
 
   function handleRemove() {
     for(const movieID of checked) {
-      dispatch(removeMovie(movieID));
+      dispatch(removeAdminMovieAsync(movieID));
     }
   }
 
   function handleConfirm() {
     for(const movieID of checked) {
-      dispatch(confirmMovie(movieID));
+      dispatch(confirmMovieAsync(movieID));
     }
   }
 

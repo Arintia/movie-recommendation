@@ -10,15 +10,7 @@ app.use(cors());
 app.use(json());
 
 let movies = [
-    {
-        id: uid(),
-        imgUrl: "test", 
-        title: "test", 
-        director: "test", 
-        shortDesc: "test", 
-        rating: 3.5, 
-        recommendedBy: "test", 
-    }
+
 ];
 
 let adminMovies = [
@@ -27,17 +19,11 @@ let adminMovies = [
 
 app.get("/movies", (req, res) => res.send(movies));
 
-app.post("/movies", (req, res) => {
-    const newMovie = {
-        id: req.body.id,
-        imgUrl: req.body.imgUrl,
-        title: req.body.title,
-        director: req.body.director,
-        shortDesc: req.body.shortDesc,
-        rating: Number(req.body.rating),
-        recommendedBy: req.body.recommendedBy
-    };
+app.post("/movies/:id", (req, res) => {
+    const id = req.params.id;
+    const newMovie = adminMovies.find(movie => id === movie.id);
     movies.push(newMovie);
+    adminMovies = adminMovies.filter(movie => newMovie.id !== movie.id);
     return res.send(newMovie);
 });
 

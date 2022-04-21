@@ -2,11 +2,10 @@ import { faPaperPlane } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { addMovie } from "../redux/movies/MoviesSlice";
+import { addAdminMovieAsync } from "../redux/movies/MoviesSlice";
 
 
 export default function Recommend() {
-  // const movieAdded = useSelector(state => state.movies.addedItem); 
   const dispatch = useDispatch();
   const imgUrl = useRef("");
   const title = useRef("");
@@ -33,7 +32,7 @@ export default function Recommend() {
       rating: rating.current, 
       recommendedBy: recommendedBy.current
     };
-    await dispatch(addMovie(payload));
+    await dispatch(addAdminMovieAsync(payload));
     for(const input of formInputs) {
       input.value = "";
     }
