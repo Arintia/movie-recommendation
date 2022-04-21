@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard/MovieCard";
 
 export default function Recommend() {
@@ -24,16 +25,22 @@ export default function Recommend() {
                 </form>
             </div>
         </main>
-        <div className="container w-screen flex flex-wrap justify-evenly">
+        <div className="container w-screen flex flex-wrap justify-evenly mb-24">
             {movies.map(movie => 
-                <MovieCard 
+                <Link 
+                    className="w-96 mr-3 mb-6"
                     key={movie.id}
-                    imgUrl={movie.imgUrl}
-                    title={movie.title}
-                    director={movie.director}
-                    description={movie.shortDesc}
-                    rating={movie.rating}
-                />
+                    to={`/movie/${movie.id}`}
+                >
+                    <MovieCard 
+                        key={movie.id}
+                        imgUrl={movie.imgUrl}
+                        title={movie.title}
+                        director={movie.director}
+                        description={movie.shortDesc}
+                        rating={movie.rating}
+                    />
+                </Link>
             )}
         </div>
       </>

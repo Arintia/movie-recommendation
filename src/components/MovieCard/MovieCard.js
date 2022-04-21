@@ -8,7 +8,7 @@ function MovieCard({ imgUrl, title, director, description, rating }) {
         ratingArr.push(i);
     }
     return (
-        <div className="card mb-6 mr-2 lg:w-1/4 bg-slate-200 shadow-xl">
+        <div className="card w-full bg-slate-200 shadow-xl">
             <figure 
                 style={
                     {
