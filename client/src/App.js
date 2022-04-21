@@ -1,8 +1,17 @@
-import React from 'react';
-import { Outlet, NavLink } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { Outlet, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 function App() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if(location.pathname === "/") {
+      navigate("/movies");
+    }
+  }, [navigate, location.pathname]);
+
   return (
     <>
       <nav className="text-white w-screen bg-slate-900 fixed top-0 h-12 z-10">

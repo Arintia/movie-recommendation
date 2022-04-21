@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Arintia/movie-recommendation/issues"
   },
-  "homepage": "https://github.com/Arintia/movie-recommendation#readme"
+  "homepage": "https://github.com/Arintia/movie-recommendation#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
 }
