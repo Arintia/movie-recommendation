@@ -1,11 +1,12 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import MovieCard from "../components/MovieCard/MovieCard";
 
 export default function Recommend() {
     const movies = useSelector(state => state.movies.items);
     return (
         <>
+        <Outlet />
         <main className="my-12 flex justify-center bg-slate-100">
             <div className="mt-12 mb-6 text-center">
                 <h3 className="text-5xl">Find your next favourite movie now!</h3>
@@ -30,7 +31,7 @@ export default function Recommend() {
                 <Link 
                     className="w-96 mr-3 mb-6"
                     key={movie.id}
-                    to={`/movie/${movie.id}`}
+                    to={`/movies/${movie.id}`}
                 >
                     <MovieCard 
                         key={movie.id}
