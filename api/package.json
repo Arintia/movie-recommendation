@@ -1,0 +1,19 @@
+{
+  "name": "movie-recommendation-api",
+  "version": "1.0.0",
+  "description": "API for movie recommendation app by Yigit Atak",
+  "main": "App.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arintia/movie-recommendation.git"
+  },
+  "author": "Yigit Atak",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Arintia/movie-recommendation/issues"
+  },
+  "homepage": "https://github.com/Arintia/movie-recommendation#readme"
+}
