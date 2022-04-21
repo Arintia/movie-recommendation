@@ -1,12 +1,13 @@
 import React from 'react';
 import { faStar,faStarHalf } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toRatingArr } from '../../utils/functions';
+
 
 function MovieCard({ imgUrl, title, director, description, rating }) {
-    const ratingArr = [];
-    for(let i = 0; i < Math.floor(rating); i++) {
-        ratingArr.push(i);
-    }
+
+    const ratingArr = toRatingArr(rating);
+    console.log(ratingArr);
     return (
         <div className="card w-full bg-slate-200 shadow-xl">
             <figure 

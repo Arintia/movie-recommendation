@@ -57,7 +57,7 @@ export const MoviesSlice = createSlice({
                     imgUrl: item.imgUrl, 
                     title: item.title, 
                     director: item.director, 
-                    shortDesc: item.description, 
+                    shortDesc: item.shortDesc, 
                     rating: item.rating, 
                     recommendedBy: item.recommendedBy,
                 });

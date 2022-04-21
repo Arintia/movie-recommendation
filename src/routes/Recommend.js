@@ -106,9 +106,9 @@ export default function Recommend() {
           <textarea 
             name="description"
             className="form-input textarea w-full resize-none rounded-lg bg-slate-900 text-white" 
-            placeholder="Short description(max. 255 chars allowed)"
+            placeholder="Short description(max. 325 chars allowed)"
             id="description"
-            maxLength={255}
+            maxLength={325}
             onChange={e => description.current = e.target.value} 
             required
           >
@@ -138,8 +138,8 @@ export default function Recommend() {
             Rating
           </label>
         <div className="rating rating-lg rating-half mb-4">
-          <input type="radio" value={0} name="rating-10" className="rating-hidden" />
-          <input type="radio" value={0.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => rating.current = e.target.value}/>
+          <input type="radio" value={1} name="rating-10" className="rating-hidden" />
+          <input type="radio" value={1} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => rating.current = e.target.value}/>
           <input type="radio" value={1} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => rating.current = e.target.value} checked />
           <input type="radio" value={1.5} name="rating-10" className="mask mask-star-2 mask-half-1" onChange={e => rating.current = e.target.value} />
           <input type="radio" value={2} name="rating-10" className="mask mask-star-2 mask-half-2" onChange={e => rating.current = e.target.value} />
