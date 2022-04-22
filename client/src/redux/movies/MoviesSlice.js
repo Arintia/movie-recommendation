@@ -50,7 +50,8 @@ export const MoviesSlice = createSlice({
 
         ],
         addedItem: false,
-        isLoggedIn: false
+        isLoggedIn: false,
+        error: null
     },
     reducers: {
         handleLogin: (state, action) => {
@@ -60,18 +61,25 @@ export const MoviesSlice = createSlice({
     extraReducers: {
         [confirmMovieAsync.fulfilled]: (state, action) => {
             const newMovie = action.payload;
+            console.log(newMovie);
             state.items.push(newMovie);
             state.adminItems = state.adminItems.filter(movie => newMovie.id !== movie.id);
         },
+        [confirmMovieAsync.rejected]: (state, action) => {
+            state.error = action.error.message;
+        },
         [deleteMovieAsync.fulfilled]: (state, action) => {
-            const { id } = action.payload;
+            const id = action.payload;
             state.items = state.items.filter(movie => id !== movie.id);
         },
         [addAdminMovieAsync.fulfilled]: (state, action) => {
             state.adminItems.push(action.payload);
         },
+        [addAdminMovieAsync.rejected]: (state, action) => {
+            state.error = action.error.message;
+        },
         [removeAdminMovieAsync.fulfilled]: (state, action) => {
-            const { id } = action.payload;
+            const id  = action.payload;
             state.adminItems = state.adminItems.filter(movie => id !== movie.id);
         },
         [getMoviesAsync.fulfilled]: (state, action) => {
