@@ -48,6 +48,7 @@ export default function Recommend() {
                         imgUrl={movie.imgUrl}
                         title={movie.title}
                         director={movie.director}
+                        genre={movie.genre}
                         description={movie.shortDesc}
                         rating={movie.rating}
                     />

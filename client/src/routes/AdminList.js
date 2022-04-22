@@ -152,8 +152,6 @@ export default function AdminList() {
    */
   useEffect(() => {
     if(increaseBtn) {
-      console.log(page);
-      console.log(totalPages);
       if(page === totalPages) {
         increaseBtn.disabled = true;
       } 
@@ -199,6 +197,7 @@ export default function AdminList() {
               <th>Recommended Information</th>
               <th>Description</th>
               <th>Director</th>
+              <th>Genre</th>
               <th>Rating</th>
               <th></th>
             </tr>
@@ -212,6 +211,7 @@ export default function AdminList() {
                 title={movie.title}
                 director={movie.director}
                 description={movie.shortDesc}
+                genre={movie.genre}
                 rating={movie.rating}
                 recommendedBy={movie.recommendedBy}
                 addList={addList}
@@ -257,6 +257,7 @@ export default function AdminList() {
                   </button>
                 </div>
               </th>
+              <th></th>
               <th></th>
               <th></th>
               <th>

@@ -23,7 +23,7 @@ export default function Movie() {
      * Converts the rating into an array.
      */
     const ratingArr = toRatingArr(movie.rating);
-
+    console.log(movie);
     return (
         <main className="h-screen container lg:pl-32 bg-slate-100 w-screen">
             <a href="/movies" className="lg:mt-24 mt-16 btn btn-xs rounded-lg mb-8"><FontAwesomeIcon className="mr-2" icon={faArrowLeft} /> Back</a>
@@ -42,6 +42,7 @@ export default function Movie() {
                     <h4 className="text-md opacity-50 mb-4">Recommended by {movie.recommendedBy}</h4>
                     <p className="mb-4">{movie.shortDesc}</p>
                     <p className="opacity-50"><span className="font-bold">Directed by:</span> {movie.director}</p>
+                    <p className="opacity-50"><span className="font-bold">Genre: </span>{movie.genre}</p>
                     <div className="absolute lg:right-40 right-20 lg:bottom-20 bottom-0 text-center">
                         <h4 className="text-lg font-bold">Rating</h4>
                         {ratingArr.map((rating, index) => // The converted rating array is utilized to print stars with FontAwesome.

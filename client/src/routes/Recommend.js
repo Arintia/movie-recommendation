@@ -13,6 +13,7 @@ export default function Recommend() {
   const description = useRef("");
   const rating = useRef(0);
   const recommendedBy = useRef("");
+  const genre = useRef("");
   const confirmationAlert = useRef();
   const formInputs = document.getElementsByClassName("form-input");
   
@@ -33,11 +34,13 @@ export default function Recommend() {
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(!genre.current || genre.current === "") return;
     const payload = {
       imgUrl: imgUrl.current, 
       title: title.current, 
       director: director.current, 
       shortDesc: description.current, 
+      genre: genre.current,
       rating: rating.current, 
       recommendedBy: recommendedBy.current
     };
@@ -50,7 +53,7 @@ export default function Recommend() {
   }
 
   return (
-    <main className="pt-12 mt-12 w-screen h-screen flex justify-center items-center bg-slate-100 mb-16">
+    <main className="pt-12 lg:mt-4 pb-16 w-screen h-screen flex justify-center items-center bg-slate-100 mb-24">
       <form className="mx-auto text-center mt-12 lg:w-1/4 sm:w-1/2 bg-white rounded-xl p-9" onSubmit={handleSubmit}>
         <h2 className="text-xl text-left mb-2">Recommend a movie</h2>
         <div className="mb-4">
@@ -139,6 +142,28 @@ export default function Recommend() {
             required
           />
         </div>
+        <label 
+          htmlFor="genres"
+          className="text-left mb-1 block text-sm font-light text-black"
+        >
+          Genre
+        </label>
+        <select 
+          id="genres" 
+          className="mb-4 bg-slate-900 border border-slate-800 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+          onChange={(e) => genre.current = e.target.value}
+        >
+          <option value="">Please select a genre.</option>
+          <option value="Action">Action</option>
+          <option value="Comedy">Comedy</option>
+          <option value="Drama">Drama</option>
+          <option value="Fantasy">Fantasy</option>
+          <option value="Horror">Horror</option>
+          <option value="Mystery">Mystery</option>
+          <option value="Romance">Romance</option>
+          <option value="Thriller">Thriller</option>
+          <option value="Western">Western</option>
+        </select>
         <label 
             htmlFor="rating-10" 
             className="text-left mb-1 block text-sm font-light text-black"

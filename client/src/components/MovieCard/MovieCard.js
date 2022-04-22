@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toRatingArr } from '../../utils/functions';
 
 
-function MovieCard({ imgUrl, title, director, description, rating }) {
+function MovieCard({ imgUrl, title, director, description, genre, rating }) {
     /**
      * Converts the rating into an array.
      */
@@ -23,7 +23,8 @@ function MovieCard({ imgUrl, title, director, description, rating }) {
                     }
                 } 
             />
-            <div className="pt-4 pl-4 card-body">
+            <div className="pt-4 pl-4 card-body relative">
+                <div className="badge absolute top-5 right-5">{genre}</div>
                 <div>
                     <h4 className="text-xl">{title}</h4>
                     <p className="font-light">by <strong>{director}</strong></p>

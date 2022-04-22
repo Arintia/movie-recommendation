@@ -5,7 +5,7 @@ import { confirmMovieAsync, removeAdminMovieAsync } from '../../redux/movies/Mov
 import { useDispatch } from 'react-redux';
 
 
-function AdminCard({ id, imgUrl, title, director, description, rating, recommendedBy, addList, checked }) {
+function AdminCard({ id, imgUrl, title, director, description, genre, rating, recommendedBy, addList, checked }) {
     const dispatch = useDispatch();
     return (
         <tr>
@@ -43,7 +43,12 @@ function AdminCard({ id, imgUrl, title, director, description, rating, recommend
             <td className="max-w-xs whitespace-normal">
                 {description}
             </td>
-            <td>{director}</td>
+            <td>
+                {director}
+            </td>
+            <td>
+                {genre}
+            </td>
             <td>
                 {rating}
             </td>

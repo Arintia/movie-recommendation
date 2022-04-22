@@ -43,6 +43,7 @@ export const deleteMovieAsync = createAsyncThunk('movies/deleteMovieAsync', asyn
  *          title: string,
  *          director: string,
  *          description: string,
+ *          genre: string,
  *          rating: number,
  *          recommendedBy: string
  *         }} data - Payload object of the movie to be added.
