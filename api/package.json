@@ -4,7 +4,7 @@
   "description": "API for movie recommendation app by Yigit Atak",
   "main": "App.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node App.js"
   },
   "repository": {
     "type": "git",

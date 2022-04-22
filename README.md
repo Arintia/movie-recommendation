@@ -47,7 +47,8 @@ This project uses multiple libraries and frameworks.
 
 ### Getting Started
 You need the following tools for installation:
-- [NPM](https://www.npmjs.com/)
+- [Docker](https://www.docker.com/)
+
 
 #### Installation
 In order to run this project, you need to boot up both the client and the API.
@@ -55,23 +56,14 @@ In order to run this project, you need to boot up both the client and the API.
 `git clone https://github.com/Arintia/movie-recommendation.git`
 2. Navigate to the newly created folder.
 `cd movie-recommendation`
-3. Open 2 separate terminals.
-4. In terminal 1, navigate to the client subfolder.
-`cd client`
-5. Install dependencies for the client.
-`npm i`
-6. Boot the client up.
-`npm start`
-7. In terminal 2, navigate to the api subfolder.
-`cd api`
-8. Install dependencies for the API.
-`npm i`
-9. Boot the API up.
-`node app`
-10. Happy hacking!
+3. Boot up the frontend and the API on docker.
+`docker-compose up --build`
+4. Go to the link below to test the app locally.
+`http://localhost:3000`
+5. Happy hacking!
 
 ### Usage
-This proje
+This project can be used for building your own movie recommendation service. It features a search functionality, a form to recommend movies, a simple admin panel, a login page, and a movie details page.
 
 ### Roadmap
 - [ ] Better UX design.(Currently doesn't have any error messages if an operation fails.)
@@ -83,7 +75,7 @@ This proje
 - [ ] 404 page.
 - [ ] Ability for users to give a thumbs up and thumbs down to comments.
 - [ ] General testing and bug fixing.
-- [ ] Add dockerfile.
+- [X] Add dockerfile.
 - [ ] Deploy on heroku.
 
 ### Contributing
