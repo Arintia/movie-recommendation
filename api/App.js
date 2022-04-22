@@ -17,6 +17,7 @@ app.use(bodyParser.json());
  * @param movies.title - Title of the movie.
  * @param movies.director - Director(s) of the movie.
  * @param movies.shortDesc - Short description of the movie(max. 325 characters)
+ * @param movies.genre - Genre of the movie
  * @param movies.rating - Rating of the movie.
  * @param movies.recommendedBy - Name of the person that recommended the movie.
  */
@@ -31,6 +32,7 @@ let movies = [
  * @param adminMovies.title - Title of the movie.
  * @param adminMovies.director - Director(s) of the movie.
  * @param adminMovies.shortDesc - Short description of the movie(max. 325 characters)
+ * @param adminMovies.genre - Genre of the movie
  * @param adminMovies.rating - Rating of the movie.
  * @param adminMovies.recommendedBy - Name of the person that recommended the movie.
  */
@@ -95,6 +97,7 @@ app.post("/adminlist", (req, res) => {
         title: req.body.title,
         director: req.body.director,
         shortDesc: req.body.shortDesc,
+        genre: req.body.genre,
         rating: Number(req.body.rating),
         recommendedBy: req.body.recommendedBy
     };
