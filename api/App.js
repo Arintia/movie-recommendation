@@ -63,9 +63,7 @@ app.post("/adminlist", (req, res) => {
 
 app.delete("/adminlist/:id", (req, res) => {
     const id = req.params.id;
-    console.log(adminMovies);
     adminMovies = adminMovies.filter(adminMovie => id !== adminMovie.id);
-    console.log(adminMovies);
     return res.send(id);
 });
 
