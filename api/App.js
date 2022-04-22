@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { uid } from "uid";
-import { createClient } from 'redis';
 
 const app = express();
 const port = 3001;
