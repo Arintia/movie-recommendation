@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard/MovieCard";
 import { getMoviesAsync } from "../redux/movies/MoviesSlice";
 
@@ -8,13 +8,15 @@ export default function Recommend() {
     const movies = useSelector(state => state.movies.items);
     const dispatch = useDispatch();
     
+    /**
+     * Fetches movies from the API upon dom mount.
+     */
     useEffect(() => {
         dispatch(getMoviesAsync());
     }, [dispatch]);
     
     return (
         <>
-        <Outlet />
         <main className="my-12 flex justify-center bg-slate-100">
             <div className="mt-12 mb-6 text-center">
                 <h3 className="text-5xl">Find your next favourite movie now!</h3>

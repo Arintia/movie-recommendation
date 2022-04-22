@@ -16,6 +16,12 @@ import AdminList from './routes/AdminList';
 import Movie from './routes/Movie';
 
 const root = ReactDOMClient.createRoot(document.getElementById("root"));
+
+/**
+ * Provider component makes the Redux store available to nested components, thus allowing us to use the slice.
+ * BrowserRouter syncs our UI with our URL. 
+ * Routes basically acts like a <Switch> and is a new react-router functionality.
+ **/ 
 root.render(
   <Provider store={store}>
     <BrowserRouter>

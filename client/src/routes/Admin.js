@@ -19,6 +19,9 @@ export default function Recommend() {
     errorText.current = document.getElementById("error-text");
   }, []);
 
+  /**
+   * If the user is already logged in, they're redirected to /adminlist path and don't need to login again.
+   */
   useEffect(() => {
     if(isLoggedIn) {
       navigate("/adminlist");
@@ -27,13 +30,13 @@ export default function Recommend() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!username.current || !password.current) return;
-    if(adminAccounts.find(account => account.userName === username.current && account.password === password.current)) {
-      await dispatch(handleLogin());
-      navigate("/adminlist");
+    if(!username.current || !password.current) return; // If the fields are empty, don't execute the callback.
+    if(adminAccounts.find(account => account.userName === username.current && account.password === password.current)) { // Account info is stored on the frontend. It checks whether the entered information is stored in the adminAccounts state.
+      await dispatch(handleLogin()); 
+      navigate("/adminlist");  // Re-directs user to /adminlist path after login.
     } else {
       setIsFailedLogin(true);
-      errorText.current.classList.remove("hidden");
+      errorText.current.classList.remove("hidden"); // shows error after failed login
     }
   }
 

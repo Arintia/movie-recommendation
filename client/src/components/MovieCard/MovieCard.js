@@ -5,8 +5,11 @@ import { toRatingArr } from '../../utils/functions';
 
 
 function MovieCard({ imgUrl, title, director, description, rating }) {
-
+    /**
+     * Converts the rating into an array.
+     */
     const ratingArr = toRatingArr(rating);
+
     return (
         <div className="card w-full bg-slate-200 shadow-xl">
             <figure 
@@ -29,7 +32,7 @@ function MovieCard({ imgUrl, title, director, description, rating }) {
                 <div className="card-actions">
                     <div className="flex w-full justify-between items-center">
                         <div className="flex items-center">
-                            {ratingArr.map((rating, index) =>
+                            {ratingArr.map((rating, index) => // The converted rating array is utilized to print stars with FontAwesome.
                                 <FontAwesomeIcon key={index} className="mr-1" icon={faStar} />
                             )}
                             {ratingArr.length < rating && <FontAwesomeIcon className="mr-1" icon={faStarHalf} />}

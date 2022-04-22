@@ -14,14 +14,23 @@ export default function Recommend() {
   const rating = useRef(0);
   const recommendedBy = useRef("");
   const confirmationAlert = useRef();
-  const failAlert = useRef();
   const formInputs = document.getElementsByClassName("form-input");
   
+  /**
+   * useEffect assigns confirmation alert div when the DOM is mounted.
+   * confirmation alert div is shown when an entry is successfully added.
+   */
   useEffect(() => {
     confirmationAlert.current = document.getElementById("conf-alert");
-    failAlert.current = document.getElementById("deny-alert");
-  }, [])
+  }, []);
 
+  /**
+   * Handles form submission to recommend a movie.
+   * Dispatches the addAdminMovieAsync callback to send the payload to the API.
+   * Resets the form inputs.
+   * Shows confirmation alert for 2.5 seconds.
+   * @param {*} e - Event object
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     const payload = {

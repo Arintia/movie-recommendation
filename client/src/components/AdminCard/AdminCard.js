@@ -27,7 +27,7 @@ function AdminCard({ id, imgUrl, title, director, description, rating, recommend
                         <img 
                             src={`${imgUrl}`} 
                             alt="Movie"
-                            onError={({ currentTarget }) => {
+                            onError={({ currentTarget }) => { // Executes if the image cannot be loaded.
                                 currentTarget.onerror = null; 
                                 currentTarget.src="https://www.publicdomainpictures.net/pictures/280000/velka/not-found-image-15383864787lu.jpg";
                             }} 
