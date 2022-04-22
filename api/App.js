@@ -1,13 +1,15 @@
-const express = require("express");
-const cors = require('cors');
-const { json } = require('body-parser');
-const { uid } = require('uid');
+import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
+import { uid } from "uid";
+import { createClient } from 'redis';
 
 const app = express();
 const port = 3001;
-
 app.use(cors());
-app.use(json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 
 let movies = [
 
