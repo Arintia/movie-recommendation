@@ -83,6 +83,8 @@ This proje
 - [ ] 404 page.
 - [ ] Ability for users to give a thumbs up and thumbs down to comments.
 - [ ] General testing and bug fixing.
+- [ ] Add dockerfile.
+- [ ] Deploy on heroku.
 
 ### Contributing
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
